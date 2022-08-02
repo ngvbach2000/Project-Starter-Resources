@@ -75,12 +75,11 @@ stages:
                 #! /bin/bash
                 
                 sudo apt-get upgrade -y
-                sudo apt-get install python3
-                sudo apt-get install python3-pip
+                sudo apt-get install python3 -y
+                sudo apt-get install python3-pip -y
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
-                pip install selenium
                 echo 'export PATH=$PATH:/path/to/driver' >> ~/.bash_profile
                 source ~/.bash_profile
                 
