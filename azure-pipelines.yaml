@@ -44,9 +44,9 @@ stages:
   - deployment: VMDeploy
     displayName: VMDeploy
     environment:
-      name:  ENVIRONMENT NAME
-      resourceType: VirtualMachine
-      tags: TAG NAME
+      name:  udacity
+      resourceType: udacity
+      tags: y
     strategy:
       runOnce:
         deploy:
