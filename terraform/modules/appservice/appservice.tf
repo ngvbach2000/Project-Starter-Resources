@@ -2,8 +2,6 @@ resource "azurerm_app_service_plan" "test" {
   name                = "${var.application_type}-${var.resource_type}-plan"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
-  kind                = "Linux"
-  reserved            = true
   
   sku {
     tier = "Free"
