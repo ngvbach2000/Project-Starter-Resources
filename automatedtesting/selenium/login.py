@@ -7,9 +7,9 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 def login (user, password):
     print ('Starting the browser...')
     # --uncomment when running in Azure DevOps.
-    options = ChromeOptions()
-    options.add_argument("--headless") 
-    driver = webdriver.Chrome(options=options)
+    # options = ChromeOptions()
+    # options.add_argument("--headless") 
+    # driver = webdriver.Chrome(options=options)
     driver = webdriver.Chrome("C:\Tools\chromedriver\chromedriver.exe")
     print ('Browser started successfully. Navigating to the demo page to login.')
     driver.get('https://www.saucedemo.com/')
@@ -19,17 +19,19 @@ def login (user, password):
     print ('Login successfully')
 
     print ('Choose all items')
-    items = driver.find_elements("class name",'btn_small, btn_inventory')
+    items = driver.find_elements("class name",'inventory_item')
     for item in items:
-        item.click()
-        print ('Click')
+        name = item.find_element("class name",'inventory_item_name')
+        print ('Add ' + name.text + ' to cart')
+        item.find_element("class name",'btn_inventory').click()
     
     print ('Go to cart')
     driver.find_element("class name",'shopping_cart_link').click()
-    removes = driver.find_elements("class name", "btn_small, cart_button")
+    removes = driver.find_elements("class name", "cart_item")
     for remove in removes:
-        remove.click()
-        print ('Remove')
+        name = remove.find_element("class name",'inventory_item_name')
+        print ('Remove ' + name.text + ' from cart')
+        remove.find_element("class name",'cart_button').click()
 
     print ('Done')
 
