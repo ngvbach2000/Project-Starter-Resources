@@ -80,10 +80,14 @@ stages:
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
                 export PATH=$PATH:some/path
-          - task: VSTest@2
+                git clone https://github.com/ngvbach2000/Project-Starter-Resources.git
+          - task: Bash@3
             inputs:
-              testSelector: 'testAssemblies'
-              testAssemblyVer2: '**\login.py'
-              searchFolder: './automatedtesting/selenium'
+              targetType: 'inline'
+              script: |
+                # Run selenium
+                
+                cd Project-Starter-Resources/automatedtesting/selenium
+                python3 login.py
 
 
