@@ -82,7 +82,7 @@ stages:
                 export PATH=$PATH:some/path
           - task: CopyFiles@2
             inputs:
-              SourceFolder: '$(agent.builddirectory)/automatedtesting'
+              SourceFolder: '$(Pipeline.Workspace)/automatedtesting'
               Contents: '**'
               TargetFolder: '~/automatedtesting'
           - task: Bash@3
