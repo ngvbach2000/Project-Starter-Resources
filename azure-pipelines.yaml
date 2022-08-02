@@ -82,7 +82,7 @@ stages:
                 export PATH=$PATH:some/path
           - task: CopyFiles@2
             inputs:
-              SourceFolder: './automatedtesting/selenium'
+              SourceFolder: '$(agent.builddirectory)/automatedtesting/selenium'
               Contents: '**'
               TargetFolder: '~/automatedtesting/selenium'
               CleanTargetFolder: true
