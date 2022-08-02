@@ -82,9 +82,9 @@ stages:
                 export PATH=$PATH:some/path
           - task: CopyFiles@2
             inputs:
-              SourceFolder: '$(agent.builddirectory)/automatedtesting/selenium'
+              SourceFolder: '$(agent.builddirectory)'
               Contents: '**'
-              TargetFolder: '~/automatedtesting/selenium'
+              TargetFolder: '~/udacity'
               CleanTargetFolder: true
               OverWrite: true
           - task: Bash@3
@@ -93,6 +93,6 @@ stages:
               script: |
                 # Write your commands here
                 
-                ~/automatedtesting/selenium/python3 login.py
+                ~/udacity/automatedtesting/selenium/python3 login.py
 
 
