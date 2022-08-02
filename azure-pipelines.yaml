@@ -82,7 +82,7 @@ stages:
                 export PATH=$PATH:some/path
           - task: CopyFiles@2
             inputs:
-              SourceFolder: '$(agent.builddirectory)'
+              SourceFolder: ''
               Contents: '**'
               TargetFolder: '~/udacity'
               CleanTargetFolder: true
