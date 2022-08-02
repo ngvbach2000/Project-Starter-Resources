@@ -41,6 +41,7 @@ stages:
               appType: 'webAppLinux'
               appName: 'web-AppService-web'
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
+              runtimeStack: 'PYTHON|3.7'
   - deployment: VMDeploy
     displayName: web
     environment:
