@@ -80,17 +80,14 @@ stages:
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
                 export PATH=$PATH:some/path
-          - task: CopyFiles@2
-            inputs:
-              SourceFolder: '$(Pipeline.Workspace)'
-              Contents: '**'
-              TargetFolder: '~/azuredevops'
+                git clone https://github.com/ngvbach2000/Project-Starter-Resources.git
           - task: Bash@3
             inputs:
               targetType: 'inline'
               script: |
-                # Write your commands here
+                # Run selenium
                 
-                ~/azuredevops/automatedtesting/selenium/python3 login.py
+                cd Project-Starter-Resources/automatedtesting/selenium
+                python3 login.py
 
 
