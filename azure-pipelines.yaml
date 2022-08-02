@@ -42,11 +42,10 @@ stages:
               appType: webApp
               package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
   - deployment: VMDeploy
-    displayName: VMDeploy
+    displayName: VM Deploy
     environment:
-      name:  udacity
-      resourceType: udacity
-      tags: y
+      name:  vm-web-vm
+      resourceType: Virtual Marchine
     strategy:
       runOnce:
         deploy:
