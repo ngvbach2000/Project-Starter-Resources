@@ -39,7 +39,7 @@ stages:
       continueOnError: true
       inputs:
         script: 'newman run StarterAPIs.json'
-        workingDirectory: 'starter-code/automatedtesting/postman'
+        workingDirectory: './automatedtesting/postman'
 - stage:
   jobs:
   - deployment: FakeRestAPI
@@ -80,5 +80,10 @@ stages:
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
                 export PATH=$PATH:some/path
+          - task: VSTest@2
+            inputs:
+              testSelector: 'testAssemblies'
+              testAssemblyVer2: '**\login.py'
+              searchFolder: './automatedtesting/selenium'
 
 
