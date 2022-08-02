@@ -5,24 +5,24 @@ resource "azurerm_network_interface" "network" {
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = "${azurerm_subnet.test.id}"
+    subnet_id                     = "${var.subnet_id}"
     private_ip_address_allocation = "Dynamic"
-    # public_ip_address_id          = ""
+    public_ip_address_id          = "${var.public_ip}"
   }
 }
 
-resource "azurerm_linux_virtual_machine" "virtual_marchine" {
+resource "azurerm_linux_virtual_machine" "vm" {
   name                = "vm-${var.application_type}-${var.resource_type}"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
   size                = "Standard_B1s"
-  admin_username      = "admin"
+  admin_username                  = "ngvbach2000"
   network_interface_ids = [
     azurerm_network_interface.network.id,
   ]
   admin_ssh_key {
-    username   = "azureuser"
-    public_key = "file("~/.ssh/id_rsa.pub")"
+    username = "ngvbach2000"
+    public_key = file("~/.ssh/id_rsa.pub")
   }
   os_disk {
     caching           = "ReadWrite"
