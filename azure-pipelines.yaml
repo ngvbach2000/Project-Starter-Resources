@@ -80,10 +80,19 @@ stages:
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
                 export PATH=$PATH:some/path
-          - task: VSTest@2
+          - task: CopyFiles@2
             inputs:
-              testSelector: 'testAssemblies'
-              testAssemblyVer2: '**\login.py'
-              searchFolder: './automatedtesting/selenium'
+              SourceFolder: './automatedtesting/selenium'
+              Contents: '**'
+              TargetFolder: '~/automatedtesting/selenium'
+              CleanTargetFolder: true
+              OverWrite: true
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: |
+                # Write your commands here
+                
+                ~/automatedtesting/selenium/python3 login.py
 
 
