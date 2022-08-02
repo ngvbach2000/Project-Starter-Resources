@@ -75,18 +75,21 @@ stages:
                 #! /bin/bash
                 
                 sudo apt-get upgrade -y
+                sudo apt-get install python3 -y
                 sudo apt-get install python3-pip -y
                 sudo apt-get install unzip -y
                 sudo apt-get install -y chromium-browser
                 pip3 install selenium
-                export PATH=$PATH:some/path
-                git clone https://github.com/ngvbach2000/Project-Starter-Resources.git
+                echo 'export PATH=$PATH:/path/to/driver' >> ~/.bash_profile
+                source ~/.bash_profile
+                
           - task: Bash@3
             inputs:
               targetType: 'inline'
               script: |
                 # Run selenium
                 
+                git clone https://github.com/ngvbach2000/Project-Starter-Resources.git
                 cd Project-Starter-Resources/automatedtesting/selenium
                 python3 login.py
 
