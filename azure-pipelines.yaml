@@ -38,10 +38,10 @@ stages:
             displayName: 'Deploy Azure Web App'
             inputs:
               azureSubscription: 'Azure for Students (4c298133-8bec-4ca0-94e5-9c0ba696cc54)'
-              appType: 'webApp'
+              appType: 'webAppLinux'
               appName: 'web-AppService-web'
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
-              deploymentMethod: 'auto'
+              runtimeStack: 'PYTHON|3.7'
   - deployment: VMDeploy
     displayName: web
     environment:
