@@ -37,10 +37,10 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy Azure Web App'
             inputs:
-              azureSubscription: 'b9caf85e-92db-4db8-aa89-ec9158763bab'
+              azureSubscription: 'Azure for Students (4c298133-8bec-4ca0-94e5-9c0ba696cc54)'
+              appType: 'webAppLinux'
               appName: 'web-AppService-web'
-              appType: webApp
-              package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip
+              package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
   - deployment: VMDeploy
     displayName: web
     environment:
