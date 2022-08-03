@@ -14,7 +14,7 @@ stages:
         script: |
           terraform init
           terraform plan
-          terraform apply
+          terraform apply -auto-approve
         workingDirectory: './terraform'
     # Needed for Terraform VM deployment
     - task: InstallSSHKey@0
@@ -51,8 +51,16 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script: 'newman run StarterAPIs.json'
+        script: 'newman run StarterAPIs.json  --reporters cli,junit --reporter-junit-export junit-report.xml'
+
         workingDirectory: './automatedtesting/postman'
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results for postman'
+      inputs:
+       testResultsFormat: 'JUnit'
+       testResultsFiles: '**/*.xml'
+       mergeTestResults: true
+       failTaskOnFailedTests: false
 - stage:
   jobs:
   - deployment: FakeRestAPI
