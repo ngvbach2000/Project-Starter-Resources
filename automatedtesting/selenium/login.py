@@ -7,10 +7,11 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 def login (user, password):
     print ('Starting the browser...')
     # --uncomment when running in Azure DevOps.
-    # options = ChromeOptions()
-    # options.add_argument("--headless") 
+    options = ChromeOptions()
+    options.add_argument("--headless") 
     # driver = webdriver.Chrome(options=options)
-    driver = webdriver.Chrome("/usr/lib/chromium-browser/chromedriver")
+    chromedriver = "/usr/lib/chromium-browser/chromedriver"
+    driver = webdriver.Chrome(executable_path=chromedriver, options=options)
     print ('Browser started successfully. Navigating to the demo page to login.')
     driver.get('https://www.saucedemo.com/')
     driver.find_element("id",'user-name').send_keys(user)
