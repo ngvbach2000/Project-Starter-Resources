@@ -90,7 +90,9 @@ stages:
                 # Run selenium
                 
                 git clone https://github.com/ngvbach2000/Project-Starter-Resources.git
-                cd Project-Starter-Resources/automatedtesting/selenium
+                cd Project-Starter-Resources
+                git pull
+                cd automatedtesting/selenium
                 python3 login.py
 
 
