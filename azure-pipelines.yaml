@@ -27,7 +27,7 @@ stages:
     - task: PublishPipelineArtifact@1
       inputs:
         targetPath: './/automatedtesting'
-        artifact: 'AutomatedTesting'
+        artifact: 'automatedtesting'
         publishLocation: 'pipeline'
 
   - job: Postman
@@ -63,12 +63,6 @@ stages:
               appName: 'web-AppService-web'
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
               deploymentMethod: 'auto'
-          - task: ExtractFiles@1
-            inputs:
-              archiveFilePatterns: '$(Pipeline.Workspace)/drop-/automatedtesting/$(Build.BuildId)-automatedtesting.zip'
-              destinationFolder: '$(Pipeline.Workspace)/automatedtesting'
-              cleanDestinationFolder: true
-              overwriteExistingFiles: true
           - task: JMeterInstaller@0
             inputs:
               jmeterVersion: '5.4.2'
