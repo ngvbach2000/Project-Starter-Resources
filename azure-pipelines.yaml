@@ -24,16 +24,11 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
-    - task: ArchiveFiles@2
-      displayName: 'Archive Automated Test'
+    - task: PublishPipelineArtifact@1
       inputs:
-        rootFolderOrFile: './automatedtesting'
-        includeRootFolder: false
-        archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-automatedtesting.zip'
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-automatedtesting.zip'
-      displayName: 'Upload Automated Test'
-      artifact: drop-automatedtesting
+        targetPath: '$(Pipeline.Workspace)/automatedtesting'
+        artifact: 'AutomatedTesting'
+        publishLocation: 'pipeline'
 
   - job: Postman
     pool:
