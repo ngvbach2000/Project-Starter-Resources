@@ -26,7 +26,7 @@ stages:
       artifact: drop-fakerestapi
     - task: PublishPipelineArtifact@1
       inputs:
-        targetPath: '$(Pipeline.Workspace)/automatedtesting'
+        targetPath: './/automatedtesting'
         artifact: 'AutomatedTesting'
         publishLocation: 'pipeline'
 
