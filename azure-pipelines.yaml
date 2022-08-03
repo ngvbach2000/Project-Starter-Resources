@@ -8,6 +8,14 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          terraform init
+          terraform plan
+          terraform apply
+        workingDirectory: './terraform'
     # Needed for Terraform VM deployment
     - task: InstallSSHKey@0
       inputs:
