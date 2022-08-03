@@ -14,7 +14,7 @@ stages:
         script: |
           terraform init
           terraform plan
-          terraform apply
+          terraform apply -auto-approve
         workingDirectory: './terraform'
     # Needed for Terraform VM deployment
     - task: InstallSSHKey@0
