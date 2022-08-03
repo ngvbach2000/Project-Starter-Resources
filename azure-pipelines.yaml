@@ -24,6 +24,9 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
+    - publish: $(Build.ArtifactStagingDirectory)
+      displayName: 'Upload Automated Test'
+      artifact: drop
 
   - job: Postman
     pool:
@@ -71,7 +74,7 @@ stages:
                 execution:
                 - scenario:
                     # You can also reference a JMeter test plan (recommended)
-                    script: ./automatedtesting/jmeter/Starter.jmx
+                    script: $(Pipeline.Workspace)/automatedtesting/jmeter/Starter.jmx
                   concurrency: 5
                   iterations: 10
                   ramp-up: 2s
