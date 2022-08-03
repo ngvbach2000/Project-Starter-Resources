@@ -30,8 +30,8 @@ stages:
         rootFolderOrFile: './automatedtesting'
         includeRootFolder: false
         archiveType: 'zip'
-        archiveFile: '$(Build.ArtifactStagingDirectory)/automatedtesting.zip'
-    - publish: $(Build.ArtifactStagingDirectory)/automatedtesting.zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-automatedtesting.zip'
+    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-automatedtesting.zip'
       displayName: 'Upload Automated Test'
       artifact: drop-automatedtesting
 
@@ -70,8 +70,8 @@ stages:
               deploymentMethod: 'auto'
           - task: ExtractFiles@1
             inputs:
-              archiveFilePatterns: '**/automatedtesting.zip'
-              destinationFolder: '**/automatedtesting'
+              archiveFilePatterns: '$(Pipeline.Workspace)/drop-/automatedtesting/$(Build.BuildId)-automatedtesting.zip'
+              destinationFolder: '$(Pipeline.Workspace)/automatedtesting'
               cleanDestinationFolder: true
               overwriteExistingFiles: true
           - task: JMeterInstaller@0
@@ -87,7 +87,7 @@ stages:
                 execution:
                 - scenario:
                     # You can also reference a JMeter test plan (recommended)
-                    script: automatedtesting/jmeter/Starter.jmx
+                    script: $(Pipeline.Workspace)/automatedtesting/jmeter/Starter.jmx
                   concurrency: 5
                   iterations: 10
                   ramp-up: 2s
