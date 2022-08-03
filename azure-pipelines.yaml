@@ -51,8 +51,17 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script: 'newman run StarterAPIs.json'
+        script: |
+          'newman run StarterAPIs.json  --reporters cli,junit --reporter-junit-export junit-report.xml'
+          sleep 40
         workingDirectory: './automatedtesting/postman'
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results for postman'
+      inputs:
+       testResultsFormat: 'JUnit'
+       testResultsFiles: '**/*.xml'
+       mergeTestResults: true
+       failTaskOnFailedTests: false
 - stage:
   jobs:
   - deployment: FakeRestAPI
