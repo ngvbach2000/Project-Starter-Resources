@@ -24,9 +24,16 @@ stages:
     - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
       displayName: 'Upload Package'
       artifact: drop-fakerestapi
-    - publish: $(Build.ArtifactStagingDirectory)
+    - task: ArchiveFiles@2
+      displayName: 'Archive Automated Test'
+      inputs:
+        rootFolderOrFile: './automatedtesting'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/automatedtesting.zip'
+    - publish: $(Build.ArtifactStagingDirectory)/automatedtesting.zip'
       displayName: 'Upload Automated Test'
-      artifact: drop
+      artifact: drop-automatedtesting
 
   - job: Postman
     pool:
@@ -61,6 +68,12 @@ stages:
               appName: 'web-AppService-web'
               package: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
               deploymentMethod: 'auto'
+          - task: ExtractFiles@1
+            inputs:
+              archiveFilePatterns: '**/automatedtesting.zip'
+              destinationFolder: '**/automatedtesting'
+              cleanDestinationFolder: true
+              overwriteExistingFiles: true
           - task: JMeterInstaller@0
             inputs:
               jmeterVersion: '5.4.2'
@@ -74,7 +87,7 @@ stages:
                 execution:
                 - scenario:
                     # You can also reference a JMeter test plan (recommended)
-                    script: $(Pipeline.Workspace)/automatedtesting/jmeter/Starter.jmx
+                    script: automatedtesting/jmeter/Starter.jmx
                   concurrency: 5
                   iterations: 10
                   ramp-up: 2s
