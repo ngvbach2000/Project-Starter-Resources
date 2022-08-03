@@ -51,9 +51,8 @@ stages:
       displayName: Run Regression Tests
       continueOnError: true
       inputs:
-        script: |
-          'newman run StarterAPIs.json  --reporters cli,junit --reporter-junit-export junit-report.xml'
-          sleep 40
+        script: 'newman run StarterAPIs.json  --reporters cli,junit --reporter-junit-export junit-report.xml'
+
         workingDirectory: './automatedtesting/postman'
     - task: PublishTestResults@2
       displayName: 'Publish Test Results for postman'
